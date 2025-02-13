@@ -1,8 +1,12 @@
 package org.example.demo1.repository.repo.crud;
 
 import org.example.demo1.repository.annotations.ColumnName;
+import org.example.demo1.repository.annotations.Param;
+import org.example.demo1.repository.annotations.Query;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.sql.*;
 import java.util.*;
 
@@ -163,5 +167,42 @@ public class CrudRepoImpl<T, ID> implements CrudRepo<T, ID> {
         for (int i = 0; i < params.length; i++) {
             pstmt.setObject(i + 1, params[i]);
         }
+    }
+    // New method to handle dynamic queries with annotations for any repository
+    public T findByQuery(Method method, Connection connection, Object... methodArgs) throws SQLException, NoSuchMethodException {
+        Query queryAnnotation = method.getAnnotation(Query.class);
+        if (queryAnnotation != null) {
+            String sql = queryAnnotation.value(); // Extract SQL from annotation
+
+            // Use reflection to find @Param annotations and bind them dynamically
+            Map<String, Object> paramMap = new HashMap<>();
+            Parameter[] parameters = method.getParameters();
+
+            // Loop through method parameters and find @Param annotations
+            for (int i = 0; i < parameters.length; i++) {
+                Param paramAnnotation = parameters[i].getAnnotation(Param.class);
+                if (paramAnnotation != null) {
+                    String paramName = paramAnnotation.value(); // Get the parameter name from the @Param annotation
+                    // Dynamically bind the actual value from the method arguments (username, connection, etc.)
+                    paramMap.put(paramName, methodArgs[i]);
+                }
+            }
+
+            // Convert named parameters (e.g., :username) to ?
+            sql = convertNamedParametersToQuestionMarks(sql, paramMap);
+
+            // Execute the query using executeQuery method
+            List<T> entities = executeQuery(sql, connection, paramMap.values().toArray());
+            return (entities.isEmpty()) ? null : entities.get(0);
+        }
+        return null;
+    }
+
+    // Convert named parameters (e.g., :username) to ?
+    private String convertNamedParametersToQuestionMarks(String query, Map<String, Object> paramMap) {
+        for (String paramName : paramMap.keySet()) {
+            query = query.replace(":" + paramName, "?");
+        }
+        return query;
     }
 }
