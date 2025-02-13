@@ -1,0 +1,13 @@
+<Context>
+    <!-- MySQL DataSource -->
+    <Resource name="jdbc/MyDS"
+              auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/example"
+              username="root"
+              password="1234"
+              maxTotal="20"
+              maxIdle="10"
+              maxWaitMillis="10000"/>
+</Context>
