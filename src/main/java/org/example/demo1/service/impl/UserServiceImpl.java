@@ -5,7 +5,9 @@ import org.example.demo1.dto.request.UserRequestDTO;
 import org.example.demo1.exception.AppException;
 import org.example.demo1.repository.RepositoryFactory;
 import org.example.demo1.repository.RepositoryType;
+import org.example.demo1.repository.entity.Customer;
 import org.example.demo1.repository.entity.User;
+import org.example.demo1.repository.repo.CustomerRepository;
 import org.example.demo1.repository.repo.TransactionManager;
 import org.example.demo1.repository.repo.UserRepository;
 import org.example.demo1.repository.repo.db.DBConnection;
@@ -22,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
 
     private final UserRepository userRepository = RepositoryFactory.getInstance().getRepo(RepositoryType.USER);
+    private final CustomerRepository customerRepository = RepositoryFactory.getInstance().getRepo(RepositoryType.CUSTOMER);
 
     @Override
     public List<User> getAllUsers() {
@@ -57,7 +60,11 @@ public class UserServiceImpl implements UserService {
 
             User savedUser = null;
             try {
+                Customer customer = Mapper.toCustomer(userRequestDTO);
+
                 savedUser = userRepository.executeSave(connection, User.class, "users", "id", user);
+                customer.setUserId(savedUser.getId());
+                customerRepository.executeSave(connection,Customer.class, "customers", "id", customer);
 
             } catch (Exception e) {
                 throw new RuntimeException(e);

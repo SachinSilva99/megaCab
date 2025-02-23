@@ -1,10 +1,12 @@
 package org.example.demo1.repository.repo.crud;
 
+import org.example.demo1.repository.SuperRepository;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface CrudRepo {
+public interface CrudRepo extends SuperRepository {
     <R> R executeQuery(String sql, Connection connection, Class<R> resultType, Object... params) throws SQLException;
 
     <L> List<L> executeQueryList(String sql, Connection connection, Class<L> resultType, Object... params) throws SQLException;

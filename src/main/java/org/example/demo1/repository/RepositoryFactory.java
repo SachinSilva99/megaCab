@@ -1,8 +1,10 @@
 package org.example.demo1.repository;
 
 import org.example.demo1.repository.repo.BookingRepository;
+import org.example.demo1.repository.repo.CustomerRepository;
 import org.example.demo1.repository.repo.UserRepository;
 import org.example.demo1.repository.repo.impl.BookingRepositoryImpl;
+import org.example.demo1.repository.repo.impl.CustomerRepoImpl;
 import org.example.demo1.repository.repo.impl.UserRepositoryImpl;
 
 import java.util.HashMap;
@@ -21,10 +23,9 @@ public class RepositoryFactory {
     private final Map<RepositoryType, SuperRepository> repositoryMap = new HashMap<>();
 
     public RepositoryFactory() {
-        UserRepository userRepository = new UserRepositoryImpl();
-        BookingRepository bookingRepository = new BookingRepositoryImpl();
-        repositoryMap.put(RepositoryType.USER, userRepository);
-        repositoryMap.put(RepositoryType.BOOKING, bookingRepository);
+        repositoryMap.put(RepositoryType.USER, new UserRepositoryImpl());
+        repositoryMap.put(RepositoryType.BOOKING, new BookingRepositoryImpl());
+        repositoryMap.put(RepositoryType.CUSTOMER, new CustomerRepoImpl());
     }
 
     public <T extends SuperRepository> T getRepo(RepositoryType repositoryType) {
