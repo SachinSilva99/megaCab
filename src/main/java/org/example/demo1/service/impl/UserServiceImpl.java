@@ -6,6 +6,7 @@ import org.example.demo1.exception.AppException;
 import org.example.demo1.repository.RepositoryFactory;
 import org.example.demo1.repository.RepositoryType;
 import org.example.demo1.repository.entity.User;
+import org.example.demo1.repository.repo.TransactionManager;
 import org.example.demo1.repository.repo.UserRepository;
 import org.example.demo1.repository.repo.db.DBConnection;
 import org.example.demo1.service.UserService;
@@ -14,7 +15,8 @@ import org.example.demo1.util.Mapper;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
+
+import static org.example.demo1.util.PasswordUtil.hashPassword;
 
 public class UserServiceImpl implements UserService {
 
@@ -24,7 +26,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         try {
-            return userRepository.findAll(DBConnection.getInstance().getConnection());
+            Connection connection = DBConnection.getInstance().getConnection();
+            return userRepository.findAll(connection);
         } catch (Exception e) {
             e.printStackTrace();
             throw new AppException(e.getMessage());
@@ -34,28 +37,43 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser() throws SQLException, NoSuchMethodException {
         Connection connection = DBConnection.getInstance().getConnection();
-        User user = userRepository.findByUsername("sachin2", connection);
+//        User user = userRepository.findByUsername("sachin2", connection);
+
+        /* boolean updated = userRepository.executeQuery("UPDATE user u SET u.username = ? WHERE u.username = ?"
+                , connection, Boolean.class, "sachin","sachin2");*/
+
+        List<User> users = userRepository.executeQueryList("SELECT * FROM user", connection, User.class);
 //        throw new AppException("User not found");
-        return user;
+        System.out.println(users);
+        return null;
     }
 
     @Override
     public void register(UserRequestDTO userRequestDTO) {
-        User user = Mapper.toUser(userRequestDTO);
-        Connection connection = DBConnection.getInstance().getConnection();
-        try {
-            userRepository.save(user, connection);
-            connection.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        TransactionManager.executeTransaction(connection -> {
+            User user = Mapper.toUser(userRequestDTO);
+            String hashedPassword = hashPassword(userRequestDTO.getPassword());
+            user.setPassword(hashedPassword);
+
+            User savedUser = null;
+            try {
+                savedUser = userRepository.executeSave(connection, User.class, "users", "id", user);
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            if (savedUser == null) {
+                throw new AppException("User not registered.");
+            }
+        });
     }
+
 
     @Override
     public void login(UserLoginRequestDTO requestDTO) throws SQLException {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            User user = userRepository.findByUsername(requestDTO.getUsername(), connection);
+//            User user = userRepository.findByUsername(requestDTO.getUsername(), connection);
         } catch (Exception e) {
             e.printStackTrace();
         }

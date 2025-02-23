@@ -1,25 +1,31 @@
 package org.example.demo1.repository.repo.db;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
     private static DBConnection dbConnection;
-    private Connection connection;
 
     private DBConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mega_city_cab", "root", "");//?useSSL=false
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Failed to load MySQL Driver", e);
         }
     }
-    public static DBConnection getInstance(){
-        return (null == dbConnection) ? dbConnection = new DBConnection() : dbConnection;
+
+    public static DBConnection getInstance() {
+        if (dbConnection == null) {
+            dbConnection = new DBConnection();
+        }
+        return dbConnection;
     }
-    public Connection getConnection() {
-        return connection;
+
+    public Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/MegaCityCab", "root", "1234"
+        );
     }
 }

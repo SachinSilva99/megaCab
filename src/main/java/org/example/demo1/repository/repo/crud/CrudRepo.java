@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface CrudRepo<T, ID> {
-    T findById(ID id, Connection connection) throws SQLException;
+public interface CrudRepo {
+    <R> R executeQuery(String sql, Connection connection, Class<R> resultType, Object... params) throws SQLException;
 
-    List<T> findAll(Connection connection) throws SQLException;
+    <L> List<L> executeQueryList(String sql, Connection connection, Class<L> resultType, Object... params) throws SQLException;
 
-    void save(T entity, Connection connection) throws SQLException, IllegalAccessException;
+    int executeUpdate(String sql, Connection connection, Object... params) throws SQLException;
 
-    void update(T entity, Connection connection) throws SQLException, IllegalAccessException, NoSuchFieldException;
+    int executeDelete(String sql, Connection connection, Object... params) throws SQLException;
 
-    void deleteById(ID id, Connection connection) throws SQLException;
+    public <T> T executeSave(Connection connection, Class<T> entityType,String tableName, String idColumnName, T entity) throws IllegalAccessException, SQLException;
 }

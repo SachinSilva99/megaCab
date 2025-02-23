@@ -4,5 +4,5 @@ package org.example.demo1.repository;
  * Author : SachinSilva
  */
 public enum RepositoryType {
-    USER
+    USER, CUSTOMER,BOOKING
 }

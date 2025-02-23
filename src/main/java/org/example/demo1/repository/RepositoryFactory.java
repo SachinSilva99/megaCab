@@ -1,6 +1,8 @@
 package org.example.demo1.repository;
 
+import org.example.demo1.repository.repo.BookingRepository;
 import org.example.demo1.repository.repo.UserRepository;
+import org.example.demo1.repository.repo.impl.BookingRepositoryImpl;
 import org.example.demo1.repository.repo.impl.UserRepositoryImpl;
 
 import java.util.HashMap;
@@ -20,7 +22,9 @@ public class RepositoryFactory {
 
     public RepositoryFactory() {
         UserRepository userRepository = new UserRepositoryImpl();
+        BookingRepository bookingRepository = new BookingRepositoryImpl();
         repositoryMap.put(RepositoryType.USER, userRepository);
+        repositoryMap.put(RepositoryType.BOOKING, bookingRepository);
     }
 
     public <T extends SuperRepository> T getRepo(RepositoryType repositoryType) {
