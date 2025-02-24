@@ -6,12 +6,13 @@ import io.jsonwebtoken.security.Keys;
 
 import java.security.Key;
 import java.util.Date;
+
 /**
  * Author : SachinSilva
  */
 public class JwtUtil {
     private static final String SECRET_KEY = "YourSuperSecretKeyForJWTGeneration"; // 32+ chars recommended
-    private static final long EXPIRATION_TIME = 3600000; // 1 hour
+    public static final long EXPIRATION_TIME = 3600000; // 1 hour
 
     private static final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 

@@ -15,5 +15,7 @@ public interface CrudRepo extends SuperRepository {
 
     int executeDelete(String sql, Connection connection, Object... params) throws SQLException;
 
-    public <T> T executeSave(Connection connection, Class<T> entityType,String tableName, String idColumnName, T entity) throws IllegalAccessException, SQLException;
+     <T> T executeSave(Connection connection, Class<T> entityType,String tableName, String idColumnName, T entity) throws IllegalAccessException, SQLException;
+
+    <T> T findById(Object id, Connection connection, Class<T> entityType, String idColumnName) throws SQLException ;
 }

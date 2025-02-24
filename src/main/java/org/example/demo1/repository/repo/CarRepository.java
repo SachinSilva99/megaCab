@@ -1,0 +1,16 @@
+package org.example.demo1.repository.repo;
+
+import org.example.demo1.dto.response.CarResponseDTO;
+import org.example.demo1.repository.repo.crud.CrudRepo;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
+/**
+ * Author : SachinSilva
+ */
+public interface CarRepository extends CrudRepo {
+
+    List<CarResponseDTO> getAvailableCars(Connection connection) throws SQLException;
+}

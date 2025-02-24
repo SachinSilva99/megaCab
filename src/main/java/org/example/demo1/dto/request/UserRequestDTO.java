@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.demo1.repository.annotations.ColumnName;
 
-import java.time.LocalDateTime;
 
 /**
  * Author : SachinSilva

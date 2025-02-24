@@ -1,6 +1,7 @@
 package org.example.demo1.service;
 
 import org.example.demo1.service.impl.UserServiceImpl;
+import org.example.demo1.service.impl.CarServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,8 +19,8 @@ public class ServiceFactory {
     private final Map<ServiceType, SuperService> serviceRegistry = new HashMap<>();
 
     public ServiceFactory() {
-        UserServiceImpl userService = new UserServiceImpl();
-        serviceRegistry.put(ServiceType.USER, userService);
+        serviceRegistry.put(ServiceType.USER, new UserServiceImpl());
+        serviceRegistry.put(ServiceType.CAR, new CarServiceImpl());
     }
 
     public <T extends SuperService> T getService(ServiceType serviceType) {

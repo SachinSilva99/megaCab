@@ -1,0 +1,32 @@
+package org.example.demo1.repository.repo.impl;
+
+import org.example.demo1.dto.response.CarResponseDTO;
+import org.example.demo1.repository.repo.CarRepository;
+import org.example.demo1.repository.repo.crud.CrudRepoImpl;
+import org.example.demo1.repository.repo.db.DBConnection;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
+/**
+ * Author : SachinSilva
+ */
+public class CarRepositoryImpl extends CrudRepoImpl implements CarRepository {
+    @Override
+    public List<CarResponseDTO> getAvailableCars(Connection connection) {
+        try {
+            String sql = """
+                SELECT c.id, c.model, c.driverId, d.`name` AS driverName, d.phone AS driverContact, c.noOfSeats 
+                FROM cars c
+                INNER JOIN drivers d ON d.id = c.driverId
+                WHERE c.availability = 'AVAILABLE'
+                """;
+            return executeQueryList(sql,connection,CarResponseDTO.class);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+}

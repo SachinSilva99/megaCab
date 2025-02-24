@@ -2,7 +2,9 @@ package org.example.demo1.service;
 
 import org.example.demo1.dto.request.UserLoginRequestDTO;
 import org.example.demo1.dto.request.UserRequestDTO;
+import org.example.demo1.dto.response.LoginResponseDTO;
 import org.example.demo1.repository.entity.User;
+import org.example.demo1.util.ResponseDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,7 +17,7 @@ public interface UserService extends SuperService {
 
     User getUser() throws SQLException, NoSuchMethodException;
 
-    void register(UserRequestDTO userRequestDTO);
+    ResponseDTO<Object> register(UserRequestDTO userRequestDTO);
 
-    void login(UserLoginRequestDTO requestDTO) throws SQLException, NoSuchMethodException;
+    ResponseDTO<LoginResponseDTO> login(UserLoginRequestDTO requestDTO) throws SQLException, NoSuchMethodException;
 }

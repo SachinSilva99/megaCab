@@ -1,18 +1,19 @@
 package org.example.demo1.repository.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+/**
+ * Author : SachinSilva
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
-public class User {
+public class Car {
     private Integer id;
-    private String username;
-    private String password;
-    private String role;
+    private String model;
+    private String plateNumber;
+    private Integer driverId;
+    private Integer noOfSeats;
 }

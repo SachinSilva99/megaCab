@@ -4,7 +4,7 @@ package org.example.demo1.util;
  * Author : SachinSilva
  */
 public record ResponseDTO<T>(String status, String message, T content) {
-    public static ResponseDTO success() {
+    public static ResponseDTO<Object> success() {
         return new ResponseDTO<>("00", "Success!", null);
     }
 

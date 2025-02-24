@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.demo1.controller.CarController;
 import org.example.demo1.controller.UserController;
 import org.example.demo1.exception.ExceptionHandlerRegistry;
 import org.example.demo1.exception.GlobalExceptionHandler;
@@ -30,6 +31,7 @@ public class DispatcherServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         registerController(new UserController());
+        registerController(new CarController());
         ExceptionHandlerRegistry.registerExceptionHandler(new GlobalExceptionHandler());  // Register exception handlers
 
     }

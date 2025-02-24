@@ -110,7 +110,7 @@ public class CrudRepoImpl implements CrudRepo {
             pstmt.setObject(1, id);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return entityType.cast(rs.getObject(1));
+                    return (mapResultSetToEntity(rs, entityType));
                 }
             }
         }
