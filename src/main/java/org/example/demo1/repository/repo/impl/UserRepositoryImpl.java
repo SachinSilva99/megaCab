@@ -1,10 +1,9 @@
 package org.example.demo1.repository.repo.impl;
 
-import org.example.demo1.exception.AppException;
-import org.example.demo1.repository.entity.User;
+import jakarta.enterprise.context.ApplicationScoped;
+import org.example.demo1.entity.User;
 import org.example.demo1.repository.repo.UserRepository;
 import org.example.demo1.repository.repo.crud.CrudRepoImpl;
-import org.example.demo1.repository.repo.db.DBConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,6 +13,7 @@ import java.util.Optional;
 /**
  * Author : SachinSilva
  */
+@ApplicationScoped
 public class UserRepositoryImpl extends CrudRepoImpl implements UserRepository {
 
 

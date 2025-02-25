@@ -1,13 +1,14 @@
 package org.example.demo1.repository.repo.impl;
 
-import org.example.demo1.repository.entity.Booking;
+import jakarta.enterprise.context.ApplicationScoped;
+import org.example.demo1.entity.Booking;
 import org.example.demo1.repository.repo.BookingRepository;
 import org.example.demo1.repository.repo.crud.CrudRepoImpl;
-import org.example.demo1.repository.repo.db.DBConnection;
 
 import java.sql.Connection;
 import java.util.Optional;
 
+@ApplicationScoped
 public class BookingRepositoryImpl extends CrudRepoImpl implements BookingRepository {
     @Override
     public Booking save(Connection connection, Booking booking) {

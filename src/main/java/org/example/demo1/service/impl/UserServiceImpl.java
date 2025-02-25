@@ -1,13 +1,13 @@
 package org.example.demo1.service.impl;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import org.example.demo1.dto.request.UserLoginRequestDTO;
 import org.example.demo1.dto.request.UserRequestDTO;
 import org.example.demo1.dto.response.LoginResponseDTO;
 import org.example.demo1.exception.AppException;
-import org.example.demo1.repository.RepositoryFactory;
-import org.example.demo1.repository.RepositoryType;
-import org.example.demo1.repository.entity.Customer;
-import org.example.demo1.repository.entity.User;
+import org.example.demo1.entity.Customer;
+import org.example.demo1.entity.User;
 import org.example.demo1.repository.repo.CustomerRepository;
 import org.example.demo1.repository.repo.transaction.TransactionManager;
 import org.example.demo1.repository.repo.UserRepository;
@@ -24,11 +24,13 @@ import java.util.List;
 import static org.example.demo1.util.PasswordUtil.checkPassword;
 import static org.example.demo1.util.PasswordUtil.hashPassword;
 
+@ApplicationScoped
 public class UserServiceImpl implements UserService {
 
-
-    private final UserRepository userRepository = RepositoryFactory.getInstance().getRepo(RepositoryType.USER);
-    private final CustomerRepository customerRepository = RepositoryFactory.getInstance().getRepo(RepositoryType.CUSTOMER);
+    @Inject
+    private UserRepository userRepository;
+    @Inject
+    private CustomerRepository customerRepository;
 
     @Override
     public List<User> getAllUsers() {
@@ -42,16 +44,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser() throws SQLException, NoSuchMethodException {
+    public User getUser() throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-//        User user = userRepository.findByUsername("sachin2", connection);
-
-        /* boolean updated = userRepository.executeQuery("UPDATE user u SET u.username = ? WHERE u.username = ?"
-                , connection, Boolean.class, "sachin","sachin2");*/
-
         List<User> users = userRepository.executeQueryList("SELECT * FROM user", connection, User.class);
-//        throw new AppException("User not found");
-        System.out.println(users);
         return null;
     }
 
@@ -64,15 +59,20 @@ public class UserServiceImpl implements UserService {
             user.setPassword(hashedPassword);
             User savedUser;
             try {
+                userRepository.findByUsername(connection, userRequestDTO.getUsername()).ifPresent((user1) -> {
+                    throw new AppException("User already exists!");
+                });
+                customerRepository.findByNic(connection, userRequestDTO.getNic()).ifPresent((customer1) -> {
+                    throw new AppException("Customer already exists!");
+                });
                 Customer customer = Mapper.toCustomer(userRequestDTO);
 
                 savedUser = userRepository.executeSave(connection, User.class, "users", "id", user);
                 customer.setUserId(savedUser.getId());
-                customerRepository.executeSave(connection, Customer.class, "customers", "id", customer);
+                return customerRepository.executeSave(connection, Customer.class, "customers", "id", customer);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-
         });
         return ResponseDTO.success();
     }

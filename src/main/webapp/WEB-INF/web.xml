@@ -19,4 +19,9 @@
         <filter-name>JwtFilter</filter-name>
         <url-pattern>/**</url-pattern>
     </filter-mapping>
+
+    <!-- Weld Listener for CDI -->
+    <listener>
+        <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+    </listener>
 </web-app>

@@ -9,15 +9,16 @@ import java.sql.SQLException;
 
 public class TransactionManager {
 
-    public static void executeTransaction(TransactionAction action) {
+    public static <T> T executeTransaction(TransactionFunction<T> action) {
         Connection connection = null;
         try {
             connection = DBConnection.getInstance().getConnection();
             connection.setAutoCommit(false); // Start transaction
 
-            action.execute(connection); // Perform the database operation
+            T result = action.execute(connection); // Perform the database operation
 
             connection.commit(); // Commit if successful
+            return result;
         } catch (Exception e) {
             if (connection != null) {
                 try {
@@ -27,7 +28,7 @@ public class TransactionManager {
                 }
             }
             e.printStackTrace();
-            throw new AppException("Transaction failed.");
+            throw new RuntimeException("Transaction failed.");
         } finally {
             if (connection != null) {
                 try {
@@ -40,7 +41,8 @@ public class TransactionManager {
     }
 
     @FunctionalInterface
-    public interface TransactionAction {
-        void execute(Connection connection) throws Exception;
+    public interface TransactionFunction<T> {
+        T execute(Connection connection) throws Exception;
     }
+
 }

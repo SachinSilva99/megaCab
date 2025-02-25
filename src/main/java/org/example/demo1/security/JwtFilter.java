@@ -31,7 +31,7 @@ public class JwtFilter implements Filter {
             Claims claims = JwtUtil.validateToken(token);
             req.setAttribute("user", claims.getSubject());
             req.setAttribute("role", claims.get("role"));
-            chain.doFilter(request, response); // Proceed with the request
+            chain.doFilter(request, response);
         } catch (Exception e) {
             res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
         }

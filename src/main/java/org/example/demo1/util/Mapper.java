@@ -1,8 +1,8 @@
 package org.example.demo1.util;
 
 import org.example.demo1.dto.request.UserRequestDTO;
-import org.example.demo1.repository.entity.Customer;
-import org.example.demo1.repository.entity.User;
+import org.example.demo1.entity.Customer;
+import org.example.demo1.entity.User;
 import org.modelmapper.ModelMapper;
 
 /**

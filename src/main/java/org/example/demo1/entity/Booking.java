@@ -1,4 +1,4 @@
-package org.example.demo1.repository.entity;
+package org.example.demo1.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 public class Booking {
     private Integer id;
     private String bookingNumber;
-    private String pickupLocation;
-    private String dropLocation;
+    private Integer pickupLocation;
+    private Integer dropLocation;
     private Double netAmount;
     private Double totalAmount;
-    private Double discount;
+    private Double taxAmount;
     private String status;
     private Integer customerId;
     private LocalDateTime createdAt;

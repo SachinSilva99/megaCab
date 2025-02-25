@@ -1,7 +1,6 @@
 package org.example.demo1.repository.repo;
 
-import org.example.demo1.repository.SuperRepository;
-import org.example.demo1.repository.entity.Booking;
+import org.example.demo1.entity.Booking;
 import org.example.demo1.repository.repo.crud.CrudRepo;
 
 import java.sql.Connection;

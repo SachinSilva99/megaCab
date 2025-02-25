@@ -1,12 +1,14 @@
 package org.example.demo1.repository.repo.impl;
 
-import org.example.demo1.repository.entity.Customer;
+import jakarta.enterprise.context.ApplicationScoped;
+import org.example.demo1.entity.Customer;
 import org.example.demo1.repository.repo.CustomerRepository;
 import org.example.demo1.repository.repo.crud.CrudRepoImpl;
 
 import java.sql.Connection;
 import java.util.Optional;
 
+@ApplicationScoped
 public class CustomerRepoImpl extends CrudRepoImpl implements CustomerRepository {
     @Override
     public Optional<Customer> findByNic(Connection connection, String nic) {

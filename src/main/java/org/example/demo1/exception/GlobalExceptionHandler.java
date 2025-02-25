@@ -4,13 +4,14 @@ package org.example.demo1.exception;
  * Author : SachinSilva
  */
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.demo1.annotations.ExceptionHandler;
 import org.example.demo1.annotations.RestControllerAdvice;
 import org.example.demo1.util.ResponseDTO;
 
 
+@Slf4j
 @RestControllerAdvice
-
 public class GlobalExceptionHandler {
     @ExceptionHandler({IllegalArgumentException.class})
     public ResponseDTO<Object> handleIllegalArgument(IllegalArgumentException ex) {
@@ -24,6 +25,7 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler({AppException.class})
     public ResponseDTO<Object> handleAppException(Exception ex) {
+
         return ResponseDTO.error("An unexpected error occurred: " + ex.getMessage());
     }
 }
