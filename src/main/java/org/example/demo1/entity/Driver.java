@@ -5,13 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Author : SachinSilva
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Distance {
-    private Integer id;
-    private String pickupLocation;
-    private String dropLocation;
-    private Double distanceKm;
+public class Driver {
+    private int id;
+    private String name;
+    private String phone;
+    private String status;
 }

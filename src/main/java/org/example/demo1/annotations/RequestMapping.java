@@ -11,6 +11,6 @@ public @interface RequestMapping {
     enum HttpMethod {
         GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD
     }
-    String value();
+    String value() default "";
     HttpMethod method() default HttpMethod.GET;
 }

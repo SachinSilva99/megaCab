@@ -48,8 +48,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/tests", method = RequestMapping.HttpMethod.GET)
-    public List<User> getUser() throws SQLException, NoSuchMethodException {
-        log.info(headerHolder.getToken());
+    public List<User> getUser() {
         return userService.getAllUsers();
     }
 }

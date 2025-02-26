@@ -1,0 +1,14 @@
+package org.example.demo1.service;
+
+import org.example.demo1.dto.response.DriverResponseDTO;
+import org.example.demo1.util.ResponseDTO;
+
+import java.sql.Connection;
+import java.util.List;
+
+/**
+ * Author : SachinSilva
+ */
+public interface DriverService extends SuperService {
+    ResponseDTO<List<DriverResponseDTO>> getAllDrivers();
+}

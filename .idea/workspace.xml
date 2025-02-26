@@ -9,18 +9,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ec86bf9-6bb5-4e74-a788-63ae40a2f82a" name="Changes" comment="booking completed">
+    <list default="true" id="0ec86bf9-6bb5-4e74-a788-63ae40a2f82a" name="Changes" comment="drivers api completed">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/DistanceController.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/DriverController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/dto/response/DistanceResponseDTO.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/dto/response/DriverResponseDTO.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/entity/Driver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/DistanceRepository.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/DriverRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/DistanceRepositoryImpl.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/DriverRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/DistanceService.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/DriverService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/DistanceServiceImpl.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/DriverServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/annotations/DispatcherServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/annotations/DispatcherServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/annotations/RequestMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/annotations/RequestMapping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/BookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/dto/response/CarResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/dto/response/CarResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/entity/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/entity/Car.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/entity/Distance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/entity/Distance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/security/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/security/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/security/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/security/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/util/Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/util/Mapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -207,7 +221,7 @@
       <workItem from="1740475844792" duration="64000" />
       <workItem from="1740476100084" duration="6671000" />
       <workItem from="1740540326030" duration="2833000" />
-      <workItem from="1740546173262" duration="2772000" />
+      <workItem from="1740546173262" duration="9353000" />
     </task>
     <task id="LOCAL-00001" summary="register completed">
       <option name="closed" value="true" />
@@ -241,7 +255,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740547270842</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="drivers api completed">
+      <option name="closed" value="true" />
+      <created>1740549248465</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1740549248465</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,6 +274,23 @@
     <MESSAGE value="available cars completed" />
     <MESSAGE value="added cdi" />
     <MESSAGE value="booking completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="booking completed" />
+    <MESSAGE value="drivers api completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="drivers api completed" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/demo1/security/JwtFilter.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/demo1/annotations/DispatcherServlet.java</url>
+          <line>82</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

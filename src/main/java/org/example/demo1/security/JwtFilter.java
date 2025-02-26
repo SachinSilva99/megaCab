@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.demo1.dto.other.HeaderHolder;
 
 import java.io.IOException;
+
 /**
  * Author : SachinSilva
  */
@@ -28,7 +29,6 @@ public class JwtFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        headerHolder.setToken("test");
         String authHeader = req.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -48,9 +48,11 @@ public class JwtFilter implements Filter {
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {}
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 
     @Override
-    public void destroy() {}
+    public void destroy() {
+    }
 }
 

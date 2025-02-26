@@ -16,4 +16,7 @@ public class Car {
     private String plateNumber;
     private Integer driverId;
     private Integer noOfSeats;
+    private String image1;
+    private String image2;
+    private String image3;
 }

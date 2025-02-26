@@ -9,10 +9,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.demo1.GreetingService;
-import org.example.demo1.controller.BookController;
-import org.example.demo1.controller.CarController;
-import org.example.demo1.controller.UserController;
+import org.example.demo1.controller.*;
+import org.example.demo1.dto.other.HeaderHolder;
 import org.example.demo1.exception.ExceptionHandlerRegistry;
 import org.example.demo1.exception.GlobalExceptionHandler;
 import org.example.demo1.util.ResponseDTO;
@@ -28,10 +26,11 @@ import java.util.Map;
 
 @WebServlet("/*")
 public class DispatcherServlet extends HttpServlet {
-    static final Map<String, Method> requestMappings = new HashMap<>();
-    static final Map<String, Object> controllers = new HashMap<>();
+    private final Map<String, Method> requestMappings = new HashMap<>();
+    private final Map<String, Object> controllers = new HashMap<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
-
+    @Inject
+    private HeaderHolder headerHolder;
 
 
     @Override
@@ -43,6 +42,8 @@ public class DispatcherServlet extends HttpServlet {
         registerController(userController);
         registerController(CDI.current().select(CarController.class).get());
         registerController(CDI.current().select(BookController.class).get());
+        registerController(CDI.current().select(DriverController.class).get());
+        registerController(CDI.current().select(DistanceController.class).get());
 
         ExceptionHandlerRegistry.registerExceptionHandler(new GlobalExceptionHandler());  // Register exception handlers
     }
@@ -82,6 +83,10 @@ public class DispatcherServlet extends HttpServlet {
         String path = req.getPathInfo();
         String method = req.getMethod();
 
+        String authHeader = req.getHeader("Authorization");
+
+        if (authHeader != null)
+            headerHolder.setToken(authHeader.substring(7));
 
         Method handlerMethod = requestMappings.get(method + ":" + path);
         if (handlerMethod == null) {

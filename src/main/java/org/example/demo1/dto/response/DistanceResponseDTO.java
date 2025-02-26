@@ -1,16 +1,19 @@
-package org.example.demo1.entity;
+package org.example.demo1.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Author : SachinSilva
+ */
+@AllArgsConstructor
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class Distance {
-    private Integer id;
+public class DistanceResponseDTO {
+    private int id;
     private String pickupLocation;
     private String dropLocation;
     private Double distanceKm;

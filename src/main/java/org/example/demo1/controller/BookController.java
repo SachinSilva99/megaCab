@@ -18,7 +18,7 @@ public class BookController {
     @Inject
     private  BookingService bookingService;
 
-    @RequestMapping(value = "", method = RequestMapping.HttpMethod.POST)
+    @RequestMapping(method = RequestMapping.HttpMethod.POST)
     public ResponseDTO<BookingResponseDTO> book(@RequestBody BookingRequestDTO requestDTO) {
         return bookingService.createBooking(requestDTO);
     }

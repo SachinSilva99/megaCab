@@ -2,6 +2,7 @@ package org.example.demo1.service.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.example.demo1.dto.other.HeaderHolder;
 import org.example.demo1.dto.request.UserLoginRequestDTO;
 import org.example.demo1.dto.request.UserRequestDTO;
 import org.example.demo1.dto.response.LoginResponseDTO;
@@ -31,10 +32,13 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Inject
     private CustomerRepository customerRepository;
+    @Inject
+    private HeaderHolder headerHolder;
 
     @Override
     public List<User> getAllUsers() {
         try {
+            User userLoggedInUser = getUserLoggedInUser();
             Connection connection = DBConnection.getInstance().getConnection();
             return userRepository.findAll(connection);
         } catch (Exception e) {
@@ -48,6 +52,19 @@ public class UserServiceImpl implements UserService {
         Connection connection = DBConnection.getInstance().getConnection();
         List<User> users = userRepository.executeQueryList("SELECT * FROM user", connection, User.class);
         return null;
+    }
+
+    @Override
+    public User getUserLoggedInUser() {
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            String username = JwtUtil.getClaims(headerHolder.getToken()).getSubject();
+            User user = userRepository.findByUsername(connection, username).orElseThrow();
+            connection.close();
+            return user;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

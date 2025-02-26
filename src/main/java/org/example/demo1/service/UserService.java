@@ -16,6 +16,7 @@ public interface UserService extends SuperService {
     List<User> getAllUsers();
 
     User getUser() throws SQLException, NoSuchMethodException;
+    User getUserLoggedInUser();
 
     ResponseDTO<Object> register(UserRequestDTO userRequestDTO);
 

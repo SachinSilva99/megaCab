@@ -19,4 +19,7 @@ public class CarResponseDTO {
     private String driverName;
     private String driverContact;
     private Integer noOfSeats;
+    private String image1;
+    private String image2;
+    private String image3;
 }
