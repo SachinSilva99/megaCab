@@ -5,7 +5,7 @@ import jakarta.inject.Inject;
 import org.example.demo1.dto.response.CarResponseDTO;
 import org.example.demo1.exception.AppException;
 import org.example.demo1.repository.repo.CarRepository;
-import org.example.demo1.repository.repo.db.DBConnection;
+import org.example.demo1.repository.db.DBConnection;
 import org.example.demo1.service.CarService;
 import org.example.demo1.util.ResponseDTO;
 
@@ -24,6 +24,7 @@ public class CarServiceImpl implements CarService {
     public ResponseDTO<List<CarResponseDTO>> getAvailableCars() {
         try (Connection connection = DBConnection.getInstance().getConnection()) {
             List<CarResponseDTO> availableCars = carRepository.getAvailableCars(connection);
+            connection.close();
             return ResponseDTO.success(availableCars);
         } catch (Exception e) {
             e.printStackTrace();

@@ -2,7 +2,7 @@ package org.example.demo1.repository.repo;
 
 import org.example.demo1.repository.SuperRepository;
 import org.example.demo1.entity.User;
-import org.example.demo1.repository.repo.crud.CrudRepo;
+import org.example.demo1.repository.crud.CrudRepo;
 
 import java.sql.Connection;
 import java.sql.SQLException;

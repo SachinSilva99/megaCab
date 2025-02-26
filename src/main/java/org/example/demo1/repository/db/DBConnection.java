@@ -1,4 +1,4 @@
-package org.example.demo1.repository.repo.db;
+package org.example.demo1.repository.db;
 
 
 import java.sql.Connection;

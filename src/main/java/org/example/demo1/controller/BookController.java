@@ -22,5 +22,20 @@ public class BookController {
     public ResponseDTO<BookingResponseDTO> book(@RequestBody BookingRequestDTO requestDTO) {
         return bookingService.createBooking(requestDTO);
     }
+    @RequestMapping(value = "/test", method = RequestMapping.HttpMethod.GET)
+    public ResponseDTO<Object> test() {
+        BookingRequestDTO requestDTO = BookingRequestDTO
+                .builder()
+                .carId(3)
+                .customerId(3)
+                .distanceId(1)
+                .totalAmount(2000.0)
+                .netAmount(1800.0)
+                .taxAmount(200.0)
+                .build();
+        ResponseDTO<BookingResponseDTO> booking = bookingService.createBooking(requestDTO);
+        System.out.println(booking);
+        return null;
+    }
 
 }

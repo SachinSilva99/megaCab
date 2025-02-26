@@ -14,8 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class BookingRequestDTO {
-    private Integer pickUpLocationId;
-    private Integer dropLocationId;
+    private int distanceId;
     private int carId;
     private Double netAmount;
     private Double totalAmount;

@@ -17,10 +17,10 @@ import java.util.List;
 public class CarController {
 
     @Inject
-    private  CarService carService;
+    private CarService carService;
 
     @RequestMapping(value = "/available", method = RequestMapping.HttpMethod.GET)
     public ResponseDTO<List<CarResponseDTO>> getAvailableCars() {
-         return carService.getAvailableCars();
+        return carService.getAvailableCars();
     }
 }

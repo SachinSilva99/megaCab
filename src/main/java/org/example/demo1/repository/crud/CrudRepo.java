@@ -1,4 +1,4 @@
-package org.example.demo1.repository.repo.crud;
+package org.example.demo1.repository.crud;
 
 import org.example.demo1.repository.SuperRepository;
 

@@ -32,8 +32,7 @@ public class DispatcherServlet extends HttpServlet {
     static final Map<String, Object> controllers = new HashMap<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Inject
-    private GreetingService greetingService;
+
 
     @Override
     public void init() throws ServletException {
@@ -83,7 +82,6 @@ public class DispatcherServlet extends HttpServlet {
         String path = req.getPathInfo();
         String method = req.getMethod();
 
-        System.out.println("Greeting ------ " + greetingService.getGreeting());
 
         Method handlerMethod = requestMappings.get(method + ":" + path);
         if (handlerMethod == null) {

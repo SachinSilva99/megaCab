@@ -1,7 +1,6 @@
-package org.example.demo1.repository.repo.transaction;
+package org.example.demo1.repository.transaction;
 
-import org.example.demo1.exception.AppException;
-import org.example.demo1.repository.repo.db.DBConnection;
+import org.example.demo1.repository.db.DBConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;

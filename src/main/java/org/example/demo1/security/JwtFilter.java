@@ -3,14 +3,24 @@ package org.example.demo1.security;
 
 import io.jsonwebtoken.Claims;
 
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.demo1.dto.other.HeaderHolder;
+
 import java.io.IOException;
 /**
  * Author : SachinSilva
  */
+@RequestScoped
+@WebFilter("/*")
 public class JwtFilter implements Filter {
+
+    @Inject
+    private HeaderHolder headerHolder;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -18,11 +28,11 @@ public class JwtFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-
+        headerHolder.setToken("test");
         String authHeader = req.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Missing or invalid Authorization header");
+            chain.doFilter(request, response);
             return;
         }
 
