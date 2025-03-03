@@ -3,7 +3,6 @@ package org.example.demo1.repository.repo.impl;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.example.demo1.dto.response.CarResponseDTO;
 import org.example.demo1.repository.repo.CarRepository;
-import org.example.demo1.repository.crud.CrudRepoImpl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -18,9 +17,8 @@ public class CarRepositoryImpl extends CrudRepoImpl implements CarRepository {
     public List<CarResponseDTO> getAvailableCars(Connection connection) {
         try {
             String sql = """
-                SELECT c.id, c.model, c.driverId, d.`name` AS driverName, d.phone AS driverContact, c.noOfSeats 
+                SELECT *
                 FROM car c
-                INNER JOIN driver d ON d.id = c.driverId
                 WHERE c.availability = 'AVAILABLE'
                 """;
             return executeQueryList(sql,connection,CarResponseDTO.class);

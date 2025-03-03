@@ -1,7 +1,6 @@
 package org.example.demo1.repository.repo;
 
 import org.example.demo1.dto.response.CarResponseDTO;
-import org.example.demo1.repository.crud.CrudRepo;
 
 import java.sql.Connection;
 import java.sql.SQLException;

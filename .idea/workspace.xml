@@ -9,33 +9,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ec86bf9-6bb5-4e74-a788-63ae40a2f82a" name="Changes" comment="drivers api completed">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/DistanceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/DriverController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/dto/response/DistanceResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/dto/response/DriverResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/entity/Driver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/DistanceRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/DriverRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/DistanceRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/DriverRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/DistanceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/DriverService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/DistanceServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/DriverServiceImpl.java" afterDir="false" />
+    <list default="true" id="0ec86bf9-6bb5-4e74-a788-63ae40a2f82a" name="Changes" comment="added jwt">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/dto/request/CarRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/dto/request/DriverRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/dto/response/BookingDetailsResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/security/CorsFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/annotations/DispatcherServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/annotations/DispatcherServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/annotations/RequestMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/annotations/RequestMapping.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/CarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/CarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/DriverController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/controller/DriverController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/dto/request/UserRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/dto/request/UserRequestDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/dto/response/CarResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/dto/response/CarResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/entity/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/entity/Car.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/entity/Distance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/entity/Distance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/security/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/security/JwtFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/security/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/security/JwtUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/entity/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/entity/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/crud/CrudRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/CrudRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/crud/CrudRepoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/CrudRepoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/BookingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/BookingRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/CarRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/CarRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/CustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/CustomerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/DistanceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/DistanceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/DriverRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/DriverRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/BookingRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/BookingRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/CarRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/CarRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/CustomerRepoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/CustomerRepoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/DistanceRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/DistanceRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/DriverRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/DriverRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/UserRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/repository/repo/impl/UserRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/BookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/BookingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/CarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/CarService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/DriverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/DriverService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/BookingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/BookingServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/CarServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/CarServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/DriverServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/DriverServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/util/Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/util/Mapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,7 +230,10 @@
       <workItem from="1740475844792" duration="64000" />
       <workItem from="1740476100084" duration="6671000" />
       <workItem from="1740540326030" duration="2833000" />
-      <workItem from="1740546173262" duration="9353000" />
+      <workItem from="1740546173262" duration="13861000" />
+      <workItem from="1740632564960" duration="8109000" />
+      <workItem from="1740713049530" duration="3537000" />
+      <workItem from="1740976405973" duration="3452000" />
     </task>
     <task id="LOCAL-00001" summary="register completed">
       <option name="closed" value="true" />
@@ -263,7 +275,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740549248465</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added jwt">
+      <option name="closed" value="true" />
+      <created>1740558848410</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1740558848410</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,22 +295,7 @@
     <MESSAGE value="added cdi" />
     <MESSAGE value="booking completed" />
     <MESSAGE value="drivers api completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="drivers api completed" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/demo1/security/JwtFilter.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/demo1/annotations/DispatcherServlet.java</url>
-          <line>82</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="added jwt" />
+    <option name="LAST_COMMIT_MESSAGE" value="added jwt" />
   </component>
 </project>

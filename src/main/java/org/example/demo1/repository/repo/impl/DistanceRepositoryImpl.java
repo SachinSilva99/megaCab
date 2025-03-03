@@ -2,8 +2,6 @@ package org.example.demo1.repository.repo.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import org.example.demo1.entity.Distance;
-import org.example.demo1.repository.crud.CrudRepoImpl;
-import org.example.demo1.repository.db.DBConnection;
 import org.example.demo1.repository.repo.DistanceRepository;
 
 import java.sql.Connection;

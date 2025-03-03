@@ -2,12 +2,10 @@ package org.example.demo1.repository.repo.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import org.example.demo1.entity.Driver;
-import org.example.demo1.repository.crud.CrudRepoImpl;
 import org.example.demo1.repository.repo.DriverRepository;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

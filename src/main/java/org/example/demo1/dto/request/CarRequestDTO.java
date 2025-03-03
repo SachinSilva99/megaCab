@@ -1,7 +1,6 @@
-package org.example.demo1.dto.response;
+package org.example.demo1.dto.request;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,12 +8,13 @@ import lombok.NoArgsConstructor;
  * Author : SachinSilva
  */
 @AllArgsConstructor
-@Data
 @NoArgsConstructor
-@Builder
-public class CarResponseDTO {
+@Data
+public class CarRequestDTO {
     private Integer id;
     private String model;
+    private String plateNumber;
+    private Integer driverId;
     private Integer noOfSeats;
     private String image1;
     private String image2;

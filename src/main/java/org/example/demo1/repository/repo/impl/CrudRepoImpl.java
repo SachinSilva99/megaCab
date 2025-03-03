@@ -1,5 +1,7 @@
-package org.example.demo1.repository.crud;
+package org.example.demo1.repository.repo.impl;
 
+
+import org.example.demo1.repository.repo.CrudRepo;
 
 import java.lang.reflect.Field;
 import java.math.BigInteger;
@@ -7,9 +9,8 @@ import java.sql.*;
 import java.util.*;
 
 public class CrudRepoImpl implements CrudRepo {
-    @Override
     @SuppressWarnings("unchecked")
-    public <R> R executeQuery(String sql, Connection connection, Class<R> resultType, Object... params) throws SQLException {
+     <R> R executeQuery(String sql, Connection connection, Class<R> resultType, Object... params) throws SQLException {
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             setQueryParameters(pstmt, params);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -22,8 +23,7 @@ public class CrudRepoImpl implements CrudRepo {
         return null;
     }
 
-    @Override
-    public <L> List<L> executeQueryList(String sql, Connection connection, Class<L> resultType, Object... params) throws SQLException {
+     <L> List<L> executeQueryList(String sql, Connection connection, Class<L> resultType, Object... params) throws SQLException {
         List<L> results = new ArrayList<>();
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             setQueryParameters(pstmt, params);
@@ -36,16 +36,8 @@ public class CrudRepoImpl implements CrudRepo {
         return results;
     }
 
-    @Override
-    public int executeUpdate(String sql, Connection connection, Object... params) throws SQLException {
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            setQueryParameters(pstmt, params);
-            return pstmt.executeUpdate();
-        }
-    }
 
-    @Override
-    public int executeDelete(String sql, Connection connection, Object... params) throws SQLException {
+     int executeUpdate(String sql, Connection connection, Object... params) throws SQLException {
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             setQueryParameters(pstmt, params);
             return pstmt.executeUpdate();
@@ -53,9 +45,17 @@ public class CrudRepoImpl implements CrudRepo {
     }
 
 
+     int executeDelete(String sql, Connection connection, Object... params) throws SQLException {
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            setQueryParameters(pstmt, params);
+            return pstmt.executeUpdate();
+        }
+    }
+
+
 
     @Override
-    public <T> T executeSave(Connection connection, Class<T> entityType, String tableName, String idColumnName, T entity) throws IllegalAccessException, SQLException {
+    public <T> T save(Connection connection, Class<T> entityType, String tableName, String idColumnName, T entity) throws IllegalAccessException, SQLException {
         StringBuilder sql = new StringBuilder("INSERT INTO " + tableName + " (");
         StringBuilder values = new StringBuilder("VALUES (");
         List<Object> paramValues = new ArrayList<>();
@@ -137,5 +137,43 @@ public class CrudRepoImpl implements CrudRepo {
             throw new SQLException("Failed to map ResultSet to entity", e);
         }
     }
+
+    @Override
+    public <T> T update(Connection connection, Class<T> entityType, String tableName, String idColumnName, T entity) throws IllegalAccessException, SQLException {
+        StringBuilder sql = new StringBuilder("UPDATE " + tableName + " SET ");
+        List<Object> paramValues = new ArrayList<>();
+        Object idValue = null;
+
+        Field[] fields = entityType.getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            Object value = field.get(entity);
+            if (field.getName().equalsIgnoreCase(idColumnName)) {
+                idValue = value;
+            } else {
+                sql.append(field.getName()).append(" = ?, ");
+                paramValues.add(value);
+            }
+        }
+
+        if (idValue == null) {
+            throw new IllegalArgumentException("ID field cannot be null for update");
+        }
+
+        sql.setLength(sql.length() - 2);
+        sql.append(" WHERE ").append(idColumnName).append(" = ?");
+        paramValues.add(idValue);
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql.toString())) {
+            setQueryParameters(pstmt, paramValues.toArray());
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Updating entity failed, no rows affected.");
+            }
+        }
+
+        return entity;
+    }
+
 
 }

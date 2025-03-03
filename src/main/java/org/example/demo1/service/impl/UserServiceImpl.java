@@ -21,6 +21,7 @@ import org.example.demo1.util.ResponseDTO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 import static org.example.demo1.util.PasswordUtil.checkPassword;
 import static org.example.demo1.util.PasswordUtil.hashPassword;
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser() throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-        List<User> users = userRepository.executeQueryList("SELECT * FROM user", connection, User.class);
+//        List<User> users = userRepository.executeQueryList("SELECT * FROM user", connection, User.class);
         return null;
     }
 
@@ -83,10 +84,12 @@ public class UserServiceImpl implements UserService {
                     throw new AppException("Customer already exists!");
                 });
                 Customer customer = Mapper.toCustomer(userRequestDTO);
-
-                savedUser = userRepository.executeSave(connection, User.class, "users", "id", user);
+                user.setRole("USER");
+                savedUser = userRepository.save(connection, User.class, "user", "id", user);
                 customer.setUserId(savedUser.getId());
-                return customerRepository.executeSave(connection, Customer.class, "customers", "id", customer);
+
+                customer.setRegistrationNumber(UUID.randomUUID().toString());
+                return customerRepository.save(connection, Customer.class, "customer", "id", customer);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

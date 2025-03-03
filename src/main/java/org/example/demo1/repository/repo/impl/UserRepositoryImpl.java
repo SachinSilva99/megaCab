@@ -3,7 +3,6 @@ package org.example.demo1.repository.repo.impl;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.example.demo1.entity.User;
 import org.example.demo1.repository.repo.UserRepository;
-import org.example.demo1.repository.crud.CrudRepoImpl;
 
 import java.sql.Connection;
 import java.sql.SQLException;

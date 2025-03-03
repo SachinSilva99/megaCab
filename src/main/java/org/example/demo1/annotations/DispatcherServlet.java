@@ -70,11 +70,11 @@ public class DispatcherServlet extends HttpServlet {
                     String methodType = methodMapping.method().name();
                     requestMappings.put(methodType + ":" + fullPath, method);
 
-                    System.out.println("✅ Registered handler: " + methodType + " " + fullPath);
+                    System.out.println("Registered handler: " + methodType + " " + fullPath);
                 }
             }
         } else {
-            System.out.println("❌ No @RequestMapping found on: " + actualClass.getName());
+            System.out.println("No @RequestMapping found on: " + actualClass.getName());
         }
     }
 
@@ -126,7 +126,7 @@ public class DispatcherServlet extends HttpServlet {
 
     private void sendSuccessResponse(HttpServletResponse resp, Object result) throws IOException {
         resp.setContentType("application/json");
-        resp.getWriter().write(objectMapper.writeValueAsString(ResponseDTO.success(result)));
+        resp.getWriter().write(objectMapper.writeValueAsString(result));
     }
 
     private void sendErrorResponse(HttpServletResponse resp, ResponseDTO<Object> errorResponse) throws IOException {

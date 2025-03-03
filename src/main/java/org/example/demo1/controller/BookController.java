@@ -5,9 +5,12 @@ import jakarta.inject.Inject;
 import org.example.demo1.annotations.RequestBody;
 import org.example.demo1.annotations.RequestMapping;
 import org.example.demo1.dto.request.BookingRequestDTO;
+import org.example.demo1.dto.response.BookingDetailsResponseDTO;
 import org.example.demo1.dto.response.BookingResponseDTO;
 import org.example.demo1.service.BookingService;
 import org.example.demo1.util.ResponseDTO;
+
+import java.util.List;
 
 /**
  * Author : SachinSilva
@@ -22,6 +25,13 @@ public class BookController {
     public ResponseDTO<BookingResponseDTO> book(@RequestBody BookingRequestDTO requestDTO) {
         return bookingService.createBooking(requestDTO);
     }
+    @RequestMapping(value = "/all-bookings", method = RequestMapping.HttpMethod.GET)
+    public ResponseDTO<List<BookingDetailsResponseDTO>> allBookings() {
+       return bookingService.allBookings();
+    }
+
+
+
     @RequestMapping(value = "/test", method = RequestMapping.HttpMethod.GET)
     public ResponseDTO<Object> test() {
         BookingRequestDTO requestDTO = BookingRequestDTO

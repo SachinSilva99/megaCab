@@ -4,6 +4,7 @@ package org.example.demo1.service.impl;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.example.demo1.dto.request.BookingRequestDTO;
+import org.example.demo1.dto.response.BookingDetailsResponseDTO;
 import org.example.demo1.dto.response.BookingResponseDTO;
 import org.example.demo1.entity.Booking;
 import org.example.demo1.entity.Customer;
@@ -16,15 +17,17 @@ import org.example.demo1.util.ResponseDTO;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @ApplicationScoped
 public class BookingServiceImpl implements BookingService {
     @Inject
-    private  CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
     @Inject
-    private  BookingRepository bookingRepository;
+    private BookingRepository bookingRepository;
 
 
     @Override
@@ -52,7 +55,7 @@ public class BookingServiceImpl implements BookingService {
                         .totalAmount(totalAmount)
                         .taxAmount(taxAmount)
                         .status("PENDING")
-                        .createdAt(LocalDateTime.now())
+                        .createdAt(Timestamp.from(Instant.now()))
                         .build();
 
                 bookingRepository.save(connection, booking);
@@ -67,15 +70,17 @@ public class BookingServiceImpl implements BookingService {
         });
     }
 
-    public Booking getBooking(String bookingNumber) {
-        Connection connection = null;
+    @Override
+    public ResponseDTO<List<BookingDetailsResponseDTO>> allBookings() {
         try {
-            connection = DBConnection.getInstance().getConnection();
+            Connection connection = DBConnection.getInstance().getConnection();
+            List<BookingDetailsResponseDTO> list = bookingRepository.getAllBookings(connection);
             connection.close();
+            return ResponseDTO.success(list);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return bookingRepository.findByBookingNumber(connection, bookingNumber)
-                .orElseThrow(() -> new RuntimeException("Booking not found"));
     }
+
+
 }
