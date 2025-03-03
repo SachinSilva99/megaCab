@@ -13,12 +13,10 @@ import java.util.List;
  * Author : SachinSilva
  */
 public interface UserService extends SuperService {
-    List<User> getAllUsers();
 
-    User getUser() throws SQLException, NoSuchMethodException;
     User getUserLoggedInUser();
 
     ResponseDTO<Object> register(UserRequestDTO userRequestDTO);
 
-    ResponseDTO<LoginResponseDTO> login(UserLoginRequestDTO requestDTO) throws SQLException, NoSuchMethodException;
+    ResponseDTO<LoginResponseDTO> login(UserLoginRequestDTO requestDTO);
 }

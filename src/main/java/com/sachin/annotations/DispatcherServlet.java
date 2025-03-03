@@ -10,7 +10,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.demo1.controller.*;
 import com.sachin.dto.other.HeaderHolder;
 import com.sachin.exception.ExceptionHandlerRegistry;
 import com.sachin.exception.GlobalExceptionHandler;
@@ -27,8 +26,8 @@ import java.util.Map;
 
 @WebServlet("/*")
 public class DispatcherServlet extends HttpServlet {
-    private final Map<String, Method> requestMappings = new HashMap<>();
-    private final Map<String, Object> controllers = new HashMap<>();
+    private static final Map<String, Method> requestMappings = new HashMap<>();
+    private static final Map<String, Object> controllers = new HashMap<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
     @Inject
     private HeaderHolder headerHolder;
@@ -38,15 +37,14 @@ public class DispatcherServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
 
-        // Retrieve all controllers dynamically from CDI
-        UserController userController = CDI.current().select(UserController.class).get();
-        registerController(userController);
-        registerController(CDI.current().select(CarController.class).get());
-        registerController(CDI.current().select(BookController.class).get());
-        registerController(CDI.current().select(DriverController.class).get());
-        registerController(CDI.current().select(DistanceController.class).get());
-
-        ExceptionHandlerRegistry.registerExceptionHandler(new GlobalExceptionHandler());  // Register exception handlers
+        if (controllers.isEmpty()) {
+            registerController(CDI.current().select(UserController.class).get());
+            registerController(CDI.current().select(CarController.class).get());
+            registerController(CDI.current().select(BookController.class).get());
+            registerController(CDI.current().select(DriverController.class).get());
+            registerController(CDI.current().select(DistanceController.class).get());
+        }
+        ExceptionHandlerRegistry.registerExceptionHandler(new GlobalExceptionHandler());
     }
 
     private void registerController(Object controller) {

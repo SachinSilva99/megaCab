@@ -1,5 +1,7 @@
 package com.sachin.controller;
 
+import com.sachin.annotations.RequestBody;
+import com.sachin.dto.request.DistanceRequestDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import com.sachin.annotations.RequestMapping;
@@ -21,7 +23,10 @@ public class DistanceController {
 
     @RequestMapping(value = "/all", method = RequestMapping.HttpMethod.GET)
     public ResponseDTO<List<DistanceResponseDTO>> getDistances() {
-
         return distanceService.getAllDistances();
+    }
+    @RequestMapping(method = RequestMapping.HttpMethod.POST)
+    public ResponseDTO<DistanceResponseDTO> createDistance(@RequestBody DistanceRequestDTO distanceRequestDTO) {
+        return distanceService.createDistance(distanceRequestDTO);
     }
 }

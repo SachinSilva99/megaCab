@@ -1,5 +1,8 @@
 package com.sachin.service.impl;
 
+import com.sachin.dto.request.DistanceRequestDTO;
+import com.sachin.entity.Distance;
+import com.sachin.exception.AppException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import com.sachin.dto.response.DistanceResponseDTO;
@@ -31,7 +34,21 @@ public class DistanceServiceImpl implements DistanceService {
             return ResponseDTO.success(list);
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new AppException(e.getMessage());
+        }
+    }
+
+    @Override
+    public ResponseDTO<DistanceResponseDTO> createDistance(DistanceRequestDTO distanceRequestDTO) {
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            Distance distance = Mapper.toDistance(distanceRequestDTO);
+
+            Distance saved = distanceRepository.save(connection, Distance.class, "distance", "id", distance);
+            connection.close();
+            return ResponseDTO.success(Mapper.toDistanceResponseDTO(saved));
+        } catch (Exception e) {
+            throw new AppException(e.getMessage());
         }
     }
 }

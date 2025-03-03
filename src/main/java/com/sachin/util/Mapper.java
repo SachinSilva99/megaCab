@@ -1,6 +1,7 @@
 package com.sachin.util;
 
 import com.sachin.dto.request.CarRequestDTO;
+import com.sachin.dto.request.DistanceRequestDTO;
 import com.sachin.dto.request.DriverRequestDTO;
 import com.sachin.dto.request.UserRequestDTO;
 import com.sachin.dto.response.BookingDetailsResponseDTO;
@@ -8,7 +9,6 @@ import com.sachin.dto.response.CarResponseDTO;
 import com.sachin.dto.response.DistanceResponseDTO;
 import com.sachin.dto.response.DriverResponseDTO;
 import com.sachin.entity.*;
-import org.example.demo1.entity.*;
 import org.modelmapper.ModelMapper;
 
 /**
@@ -48,5 +48,9 @@ public class Mapper {
 
     public static Driver toDriver(DriverRequestDTO driverRequestDTO) {
         return modelMapper.map(driverRequestDTO, Driver.class);
+    }
+
+    public static Distance toDistance(DistanceRequestDTO distanceRequestDTO) {
+        return modelMapper.map(distanceRequestDTO, Distance.class);
     }
 }

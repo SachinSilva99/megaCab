@@ -30,7 +30,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/login", method = RequestMapping.HttpMethod.POST)
-    public ResponseDTO<LoginResponseDTO> login(@RequestBody UserLoginRequestDTO requestDTO) throws SQLException, NoSuchMethodException {
+    public ResponseDTO<LoginResponseDTO> login(@RequestBody UserLoginRequestDTO requestDTO)  {
         return userService.login(requestDTO);
     }
 
@@ -38,6 +38,4 @@ public class UserController {
     public ResponseDTO<Object> register(@RequestBody UserRequestDTO userRequestDTO) {
         return userService.register(userRequestDTO);
     }
-
-
 }

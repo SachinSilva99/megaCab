@@ -36,24 +36,6 @@ public class UserServiceImpl implements UserService {
     @Inject
     private HeaderHolder headerHolder;
 
-    @Override
-    public List<User> getAllUsers() {
-        try {
-            User userLoggedInUser = getUserLoggedInUser();
-            Connection connection = DBConnection.getInstance().getConnection();
-            return userRepository.findAll(connection);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new AppException(e.getMessage());
-        }
-    }
-
-    @Override
-    public User getUser() throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-//        List<User> users = userRepository.executeQueryList("SELECT * FROM user", connection, User.class);
-        return null;
-    }
 
     @Override
     public User getUserLoggedInUser() {
@@ -64,7 +46,7 @@ public class UserServiceImpl implements UserService {
             connection.close();
             return user;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new AppException("User Not found!");
         }
     }
 
@@ -99,7 +81,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public ResponseDTO<LoginResponseDTO> login(UserLoginRequestDTO requestDTO) throws SQLException {
+    public ResponseDTO<LoginResponseDTO> login(UserLoginRequestDTO requestDTO) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
 
