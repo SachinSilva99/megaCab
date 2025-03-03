@@ -22,6 +22,7 @@ public class DistanceController {
 
     @RequestMapping(value = "/all", method = RequestMapping.HttpMethod.GET)
     public ResponseDTO<List<DistanceResponseDTO>> getDistances() {
+
         return distanceService.getAllDistances();
     }
 }
