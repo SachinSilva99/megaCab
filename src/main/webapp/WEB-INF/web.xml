@@ -13,7 +13,7 @@
     </resource-ref>
     <filter>
         <filter-name>JwtFilter</filter-name>
-        <filter-class>org.example.demo1.security.JwtFilter</filter-class>
+        <filter-class>com.sachin.security.JwtFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>JwtFilter</filter-name>
@@ -26,7 +26,7 @@
     </listener>
     <filter>
         <filter-name>CorsFilter</filter-name>
-        <filter-class>org.example.demo1.security.CorsFilter</filter-class>
+        <filter-class>com.sachin.security.CorsFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CorsFilter</filter-name>
