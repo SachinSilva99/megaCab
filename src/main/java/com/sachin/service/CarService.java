@@ -10,6 +10,7 @@ import java.util.List;
  * Author : SachinSilva
  */
 public interface CarService extends SuperService{
+
     ResponseDTO<List<CarResponseDTO>> getAvailableCars();
 
     ResponseDTO<CarResponseDTO> saveCar(CarRequestDTO car);

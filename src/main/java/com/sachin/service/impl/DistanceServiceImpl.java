@@ -29,7 +29,10 @@ public class DistanceServiceImpl implements DistanceService {
         try {
 
             Connection connection = DBConnection.getInstance().getConnection();
-            List<DistanceResponseDTO> list = distanceRepository.getDistances(connection).stream().map(Mapper::toDistanceResponseDTO).toList();
+            List<DistanceResponseDTO> list = distanceRepository.getDistances(connection)
+                    .stream()
+                    .map(Mapper::toDistanceResponseDTO)
+                    .toList();
             connection.close();
             return ResponseDTO.success(list);
 

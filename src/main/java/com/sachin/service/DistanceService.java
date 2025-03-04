@@ -10,6 +10,7 @@ import java.util.List;
  * Author : SachinSilva
  */
 public interface DistanceService {
+
     ResponseDTO<List<DistanceResponseDTO>> getAllDistances();
 
     ResponseDTO<DistanceResponseDTO> createDistance(DistanceRequestDTO distanceRequestDTO);

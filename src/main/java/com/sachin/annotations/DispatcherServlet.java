@@ -52,10 +52,9 @@ public class DispatcherServlet extends HttpServlet {
             return;
         }
 
-        // Get the real class (unproxy it)
         Class<?> actualClass = controller.getClass();
-        if (controller.getClass().getName().contains("$$")) { // Check if it's a proxy
-            actualClass = controller.getClass().getSuperclass(); // Get the original class
+        if (controller.getClass().getName().contains("$$")) {
+            actualClass = controller.getClass().getSuperclass();
         }
 
         controllers.put(actualClass.getSimpleName(), controller); // Store controller
@@ -133,4 +132,5 @@ public class DispatcherServlet extends HttpServlet {
         resp.setStatus(500);
         resp.getWriter().write(objectMapper.writeValueAsString(errorResponse));
     }
+
 }
