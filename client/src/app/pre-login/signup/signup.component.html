@@ -1,0 +1,95 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="row justify-content-center w-100">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow p-4">
+        <h3 class="text-center mb-4">Sign Up</h3>
+        <form [formGroup]="signupForm" (ngSubmit)="submitForm()">
+
+          <!-- Username -->
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="username">
+              <mat-error *ngIf="signupForm.controls['username'].hasError('required')">
+                Username is required
+              </mat-error>
+              <mat-error *ngIf="signupForm.controls['username'].hasError('minlength')">
+                Must be at least 4 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" formControlName="password">
+              <mat-error *ngIf="signupForm.controls['password'].hasError('required')">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="signupForm.controls['password'].hasError('minlength')">
+                Must be at least 6 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Name -->
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name">
+              <mat-error *ngIf="signupForm.controls['name'].hasError('required')">
+                Name is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Address -->
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Address</mat-label>
+              <input matInput formControlName="address">
+              <mat-error *ngIf="signupForm.controls['address'].hasError('required')">
+                Address is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- NIC -->
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>NIC</mat-label>
+              <input matInput formControlName="nic">
+              <mat-error *ngIf="signupForm.controls['nic'].hasError('required')">
+                NIC is required
+              </mat-error>
+              <mat-error *ngIf="signupForm.controls['nic'].hasError('pattern')">
+                Invalid NIC (e.g., 123456789V or 123456789012)
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Phone -->
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Phone</mat-label>
+              <input matInput formControlName="phone">
+              <mat-error *ngIf="signupForm.controls['phone'].hasError('required')">
+                Phone number is required
+              </mat-error>
+              <mat-error *ngIf="signupForm.controls['phone'].hasError('pattern')">
+                Must be a 10-digit number
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Submit Button -->
+          <button mat-raised-button color="primary" type="submit" class="btn btn-primary w-100">
+            Sign Up
+          </button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
