@@ -25,7 +25,7 @@ public class DBConnection {
 
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/MegaCityCab", "root", ""
+                "jdbc:mysql://localhost:3306/MegaCityCab", "root", "1234"
         );
     }
 }

@@ -42,7 +42,6 @@ public class BookingServiceImpl implements BookingService {
 
             try {
                 connection = DBConnection.getInstance().getConnection();
-
                 Customer customer = customerRepository.findById(customerId, connection, Customer.class, "id");
                 if (customer == null) throw new RuntimeException("Customer not found");
 

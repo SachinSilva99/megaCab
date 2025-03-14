@@ -30,11 +30,11 @@ import static com.sachin.util.PasswordUtil.hashPassword;
 public class UserServiceImpl implements UserService {
 
     @Inject
-    private UserRepository userRepository;
+    public UserRepository userRepository;
     @Inject
-    private CustomerRepository customerRepository;
+    public CustomerRepository customerRepository;
     @Inject
-    private HeaderHolder headerHolder;
+    public HeaderHolder headerHolder;
 
 
     @Override
@@ -103,7 +103,9 @@ public class UserServiceImpl implements UserService {
             throw new AppException("Incorrect password!!");
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new AppException("Something went wrong!!");
         }
     }
+
 }

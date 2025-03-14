@@ -24,7 +24,7 @@ import java.util.List;
 public class DriverServiceImpl implements DriverService {
 
     @Inject
-    private DriverRepository driverRepository;
+    public DriverRepository driverRepository;
 
     @Override
     public ResponseDTO<List<DriverResponseDTO>> getAllDrivers() {
@@ -47,6 +47,7 @@ public class DriverServiceImpl implements DriverService {
         try {
             DriverResponseDTO driverResponseDTO = TransactionManager.executeTransaction(connection -> {
                 Driver driver = Mapper.toDriver(driverRequestDTO);
+                driver.setStatus("AVAILABLE");
                 Driver saved = driverRepository.save(connection, Driver.class, "driver", "id", driver);
                 return Mapper.toDriverResponseDTO(saved);
             });

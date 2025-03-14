@@ -15,5 +15,6 @@ import lombok.NoArgsConstructor;
 public class DriverRequestDTO {
     private int id;
     private String name;
+    private String licenseNumber;
     private String phone;
 }

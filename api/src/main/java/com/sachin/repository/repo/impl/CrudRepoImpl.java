@@ -104,18 +104,22 @@ public class CrudRepoImpl implements CrudRepo {
         return entity;
     }
 
-    public  <T> T findById(Object id, Connection connection, Class<T> entityType, String idColumnName) throws SQLException {
+    public <T> T findById(Object id, Connection connection, Class<T> entityType, String idColumnName) {
         String sql = "SELECT * FROM " + entityType.getSimpleName() + " WHERE " + idColumnName + " = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setObject(1, id);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return (mapResultSetToEntity(rs, entityType));
+                    return mapResultSetToEntity(rs, entityType);
                 }
             }
+        } catch (SQLException e) {
+            System.out.println("========== Error");
+            e.printStackTrace(); // Or use a logger for better error handling
         }
         return null;
     }
+
 
     private void setQueryParameters(PreparedStatement pstmt, Object... params) throws SQLException {
         for (int i = 0; i < params.length; i++) {
