@@ -23,13 +23,18 @@ public class UserRepositoryImpl extends CrudRepoImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findByUsername(Connection connection, String username) throws SQLException {
-        User user = executeQuery(
-                "SELECT * FROM user u WHERE u.username = ? ",
-                connection,
-                User.class,
-                username
-        );
+    public Optional<User> findByUsername(Connection connection, String username){
+        User user = null;
+        try {
+            user = executeQuery(
+                    "SELECT * FROM user u WHERE u.username = ? ",
+                    connection,
+                    User.class,
+                    username
+            );
+        } catch (SQLException e) {
+            return Optional.of(user);
+        }
         if (user == null) {
             return Optional.empty();
         }

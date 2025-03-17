@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatInput} from '@angular/material/input';
@@ -6,6 +6,8 @@ import {NgIf} from '@angular/common';
 import {MatButton} from '@angular/material/button';
 import {UserLoginRequestDTO, UserService} from '../../core/service/user.service';
 import {RSP_SUCCESS} from '../../core/constant/ResponseCode';
+import {LoggedInUser, StorageService, USER} from '../../core/service/storage.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
@@ -27,28 +29,36 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private storageService: StorageService,
   ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log("Login Successful", this.loginForm.value);
-      const user : UserLoginRequestDTO = this.loginForm.value;
+      const user: UserLoginRequestDTO = this.loginForm.value;
       this.userService.login(user).subscribe({
-        next(res) {
+        next: (res) => {
           if (res.status === RSP_SUCCESS) {
-            console.log(res)
-
+            const token = res.content;
+            const loggedInUser: LoggedInUser = {token: token.accessToken, username: this.loginForm.value.username};
+            this.storageService.setItem(USER, loggedInUser);
+            console.log(this.storageService.getItem(USER));
           } else {
-            //error
+            Swal.fire({
+              text: res.message,
+              icon: "error"
+            });
           }
         },
         error(er) {
-          console.log(er)
+          Swal.fire({
+            text: er.message,
+            icon: "error"
+          });
         }
       });
     }

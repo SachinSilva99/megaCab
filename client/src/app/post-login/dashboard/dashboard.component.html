@@ -35,7 +35,7 @@
       <h4 class="mb-3">Select a Driver</h4>
       <select class="form-select" (change)="selectDriver($event)">
         <option value="" disabled selected>Select a driver</option>
-        <option *ngFor="let driver of drivers" [ngValue]="driver">
+        <option *ngFor="let driver of drivers" [attr.value]="driver.id">
           {{ driver.name }} - {{ driver.phone }}
         </option>
       </select>
@@ -43,11 +43,14 @@
 
 
     <!-- Booking Button -->
-  <div class="text-center mt-4">
-    <button class="btn btn-lg btn-primary px-4"
-            [disabled]="!selectedCar || !selectedDistance || !selectedDriver"
-            (click)="bookVehicle()">
-      Confirm Booking
-    </button>
+    <div class="text-center mt-4">
+      <button class="btn btn-lg btn-primary px-4"
+              [disabled]="!selectedCar || !selectedDistance || !selectedDriver"
+
+              (click)="bookVehicle()">
+        Confirm Booking
+      </button>
+    </div>
   </div>
 </div>
+

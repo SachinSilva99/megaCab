@@ -3,6 +3,7 @@ package com.sachin.annotations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sachin.controller.*;
+import com.sachin.exception.AppException;
 import jakarta.enterprise.inject.spi.CDI;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
@@ -118,7 +119,11 @@ public class DispatcherServlet extends HttpServlet {
         } catch (Exception e) {
             Throwable cause = e.getCause() != null ? e.getCause() : e;
             ResponseDTO<Object> errorResponse = ExceptionHandlerRegistry.handleException(cause);
-            sendErrorResponse(resp, errorResponse);
+            if (cause instanceof AppException) {
+                sendErrorResponse(resp, errorResponse, 200);
+            } else {
+                sendErrorResponse(resp, errorResponse);
+            }
         }
     }
 
@@ -130,6 +135,12 @@ public class DispatcherServlet extends HttpServlet {
     private void sendErrorResponse(HttpServletResponse resp, ResponseDTO<Object> errorResponse) throws IOException {
         resp.setContentType("application/json");
         resp.setStatus(500);
+        resp.getWriter().write(objectMapper.writeValueAsString(errorResponse));
+    }
+
+    private void sendErrorResponse(HttpServletResponse resp, ResponseDTO<Object> errorResponse, int code) throws IOException {
+        resp.setContentType("application/json");
+        resp.setStatus(code);
         resp.getWriter().write(objectMapper.writeValueAsString(errorResponse));
     }
 

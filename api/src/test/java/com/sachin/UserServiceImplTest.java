@@ -24,7 +24,7 @@ class UserServiceImplTest {
 
 
     @InjectMocks
-    private  UserServiceImpl userService;
+    private UserServiceImpl userService;
 
     private final UserRepository userRepository = new UserRepositoryImpl();
 
@@ -34,10 +34,11 @@ class UserServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        userService.userRepository = userRepository;
-        userService.customerRepository = customerRepository;
-        userService.headerHolder = new HeaderHolder();
+        userService.setUserRepository(userRepository);
+        userService.setCustomerRepository(customerRepository);
+        userService.setHeaderHolder(new HeaderHolder());
     }
+
     @Test
     void testRegister_Success() {
         // Arrange
@@ -52,6 +53,7 @@ class UserServiceImplTest {
         // Assert
         assertEquals("00", response.status());
     }
+
     @Test
     void testLogin_Success() {
 

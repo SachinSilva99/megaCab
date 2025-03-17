@@ -1,6 +1,9 @@
 package com.sachin.service.impl;
 
 
+import com.sachin.entity.Distance;
+import com.sachin.repository.repo.DistanceRepository;
+import com.sachin.service.UserService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import com.sachin.dto.request.BookingRequestDTO;
@@ -27,14 +30,21 @@ public class BookingServiceImpl implements BookingService {
     @Inject
     private CustomerRepository customerRepository;
     @Inject
+    private DistanceRepository distanceRepository;
+    @Inject
     private BookingRepository bookingRepository;
+    @Inject
+    private UserService userService;
 
 
     @Override
     public ResponseDTO<BookingResponseDTO> createBooking(BookingRequestDTO requestDTO) {
+        userService.getUserLoggedInUser();
         return TransactionManager.executeTransaction(connection -> {
             Integer customerId = requestDTO.getCustomerId();
             int distanceId = requestDTO.getDistanceId();
+            Distance distance = distanceRepository.findById(distanceId, connection, Distance.class, "id");
+            Double distanceKm = distance.getDistanceKm();
             Double netAmount = requestDTO.getNetAmount();
             int carId = requestDTO.getCarId();
             Double totalAmount = requestDTO.getTotalAmount();

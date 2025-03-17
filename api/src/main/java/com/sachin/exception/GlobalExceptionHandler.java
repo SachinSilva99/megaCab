@@ -25,8 +25,7 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler({AppException.class})
     public ResponseDTO<Object> handleAppException(Exception ex) {
-
-        return ResponseDTO.error("An unexpected error occurred: " + ex.getMessage());
+        return ResponseDTO.error(ex.getMessage());
     }
 }
 

@@ -1,5 +1,9 @@
 package com.sachin.service.impl;
 
+import com.sachin.dto.other.HeaderHolder;
+import com.sachin.entity.User;
+import com.sachin.service.UserService;
+import com.sachin.util.UtilMethods;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import com.sachin.dto.request.DriverRequestDTO;
@@ -12,6 +16,7 @@ import com.sachin.repository.transaction.TransactionManager;
 import com.sachin.service.DriverService;
 import com.sachin.util.Mapper;
 import com.sachin.util.ResponseDTO;
+import lombok.Data;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -21,10 +26,15 @@ import java.util.List;
  * Author : SachinSilva
  */
 @ApplicationScoped
+@Data
 public class DriverServiceImpl implements DriverService {
 
     @Inject
-    public DriverRepository driverRepository;
+    private DriverRepository driverRepository;
+    @Inject
+    private UserService userService;
+    @Inject
+    private HeaderHolder headerHolder;
 
     @Override
     public ResponseDTO<List<DriverResponseDTO>> getAllDrivers() {
@@ -45,6 +55,11 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public ResponseDTO<DriverResponseDTO> createDriver(DriverRequestDTO driverRequestDTO) {
         try {
+            User userLoggedInUser = userService.getUserLoggedInUser();
+            boolean admin = UtilMethods.isAdmin(userLoggedInUser);
+            if (!admin) {
+                throw new AppException("You do not have permission to update this Driver");
+            }
             DriverResponseDTO driverResponseDTO = TransactionManager.executeTransaction(connection -> {
                 Driver driver = Mapper.toDriver(driverRequestDTO);
                 driver.setStatus("AVAILABLE");
@@ -61,6 +76,11 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public ResponseDTO<DriverResponseDTO> updateDriver(DriverRequestDTO driverRequestDTO) {
         try {
+            User userLoggedInUser = userService.getUserLoggedInUser();
+            boolean admin = UtilMethods.isAdmin(userLoggedInUser);
+            if (!admin) {
+                throw new AppException("You do not have permission to update this Driver");
+            }
             DriverResponseDTO driverResponseDTO = TransactionManager.executeTransaction(connection -> {
                 Driver driver = Mapper.toDriver(driverRequestDTO);
                 Driver saved = driverRepository.update(connection, Driver.class, "driver", "id", driver);

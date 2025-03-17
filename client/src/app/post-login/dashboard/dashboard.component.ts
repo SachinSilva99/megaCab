@@ -4,6 +4,7 @@ import {CarResponseDTO, CarService} from '../../core/service/car.service';
 import {RSP_SUCCESS} from '../../core/constant/ResponseCode';
 import {DistanceResponseDTO, DistanceService} from '../../core/service/distance.service';
 import {ReactiveFormsModule} from '@angular/forms';
+import {DriverService} from '../../core/service/driver.service';
 
 
 interface DriverResponseDTO {
@@ -51,7 +52,8 @@ export class DashboardComponent {
 
   constructor(
     private carService: CarService,
-    private distanceService: DistanceService) {
+    private distanceService: DistanceService,
+    private driverService: DriverService) {
     this.fetchCars();
     this.fetchDistances();
     this.fetchDrivers();
@@ -88,25 +90,41 @@ export class DashboardComponent {
   }
 
   fetchDrivers() {
-
+    this.driverService.getAllDrivers().subscribe({
+      next: (res) => {
+        if (res.status === RSP_SUCCESS) {
+          this.drivers = res.content;
+        } else {
+        }
+      },
+      error(er) {
+        console.log(er)
+      }
+    });
   }
 
   selectCar(car: CarResponseDTO) {
+    console.log(car)
     this.selectedCar = car;
   }
 
   selectDistance(event: Event) {
     const selectedDistanceId = (event.target as HTMLSelectElement).value;
     console.log('Selected Distance ID:', selectedDistanceId);
+    this.selectedDistance = this.distances.find(value => value.id === parseInt(selectedDistanceId));
   }
 
   selectDriver(event: Event) {
-    const selectedDriver = (event.target as HTMLSelectElement).value;
-    this.selectedDriver = JSON.parse(selectedDriver);
+    const selectedDriverId = (event.target as HTMLSelectElement).value;
+    this.selectedDriver = this.drivers.find(value => value.id === parseInt(selectedDriverId));
   }
 
 
   bookVehicle() {
+    console.log("ww")
+    console.log(this.selectedCar)
+    console.log(this.selectedDistance)
+    console.log(this.selectedDriver)
     if (this.selectedCar && this.selectedDistance && this.selectedDriver) {
       const distanceKm = this.selectedDistance.distanceKm;
       const netAmount = distanceKm * this.perKmPrice;
@@ -120,6 +138,7 @@ export class DashboardComponent {
         taxAmount: taxAmount,
         customerId: 1
       };
+      console.log(bookingRequest)
     } else {
       return;
     }

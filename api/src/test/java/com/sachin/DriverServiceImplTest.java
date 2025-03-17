@@ -29,7 +29,7 @@ public class DriverServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        driverService.driverRepository = driverRepository;
+        driverService.setDriverRepository(driverRepository);
     }
 
     @Test

@@ -18,6 +18,9 @@ export interface UserLoginRequestDTO {
   password: string;
 }
 
+export interface LoginResponseDTO {
+accessToken: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +36,6 @@ export class UserService {
   }
 
   login(user: UserLoginRequestDTO) {
-    return this.http.post<AppResponse<null>>(this.apiUrl + "/login", user);
+    return this.http.post<AppResponse<LoginResponseDTO>>(this.apiUrl + "/login", user);
   }
 }

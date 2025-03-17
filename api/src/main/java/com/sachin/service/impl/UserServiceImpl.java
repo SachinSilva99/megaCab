@@ -17,6 +17,7 @@ import com.sachin.security.JwtUtil;
 import com.sachin.service.UserService;
 import com.sachin.util.Mapper;
 import com.sachin.util.ResponseDTO;
+import lombok.Data;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -27,14 +28,15 @@ import static com.sachin.util.PasswordUtil.checkPassword;
 import static com.sachin.util.PasswordUtil.hashPassword;
 
 @ApplicationScoped
+@Data
 public class UserServiceImpl implements UserService {
 
     @Inject
-    public UserRepository userRepository;
+    private UserRepository userRepository;
     @Inject
-    public CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
     @Inject
-    public HeaderHolder headerHolder;
+    private HeaderHolder headerHolder;
 
 
     @Override
@@ -104,7 +106,7 @@ public class UserServiceImpl implements UserService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new AppException("Something went wrong!!");
+            throw new AppException(e.getMessage());
         }
     }
 
