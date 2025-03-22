@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface CustomerRepository extends CrudRepo {
     Optional<Customer> findByNic(Connection connection, String nic);
+    Optional<Customer> findByUserId(Connection connection, Integer userId);
 }

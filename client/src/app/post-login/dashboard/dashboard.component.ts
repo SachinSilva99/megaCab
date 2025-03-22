@@ -5,8 +5,10 @@ import {RSP_SUCCESS} from '../../core/constant/ResponseCode';
 import {DistanceResponseDTO, DistanceService} from '../../core/service/distance.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {DriverService} from '../../core/service/driver.service';
-import {StorageService} from '../../core/service/storage.service';
+import {LoggedInUser, StorageService, USER} from '../../core/service/storage.service';
 import {Router} from '@angular/router';
+import {BookingService} from '../../core/service/booking.service';
+import Swal from 'sweetalert2';
 
 
 interface DriverResponseDTO {
@@ -21,7 +23,6 @@ interface BookingRequestDTO {
   netAmount: number;
   totalAmount: number;
   taxAmount: number;
-  customerId: number;
 }
 
 interface BookingResponseDTO {
@@ -52,11 +53,13 @@ export class DashboardComponent {
   selectedDistance: DistanceResponseDTO | undefined;
   selectedDriver: DriverResponseDTO | undefined;
 
+
   constructor(
     private carService: CarService,
     private distanceService: DistanceService,
     private storageService: StorageService,
     private router: Router,
+    private bookingService: BookingService,
     private driverService: DriverService) {
     this.fetchCars();
     this.fetchDistances();
@@ -125,10 +128,11 @@ export class DashboardComponent {
 
 
   bookVehicle() {
-    console.log("ww")
-    console.log(this.selectedCar)
-    console.log(this.selectedDistance)
-    console.log(this.selectedDriver)
+
+    let user = this.storageService.getItem<LoggedInUser>(USER);
+    if (!user) {
+      return;
+    }
     if (this.selectedCar && this.selectedDistance && this.selectedDriver) {
       const distanceKm = this.selectedDistance.distanceKm;
       const netAmount = distanceKm * this.perKmPrice;
@@ -139,10 +143,24 @@ export class DashboardComponent {
         carId: this.selectedCar.id,
         netAmount: netAmount,
         totalAmount: totalAmount,
-        taxAmount: taxAmount,
-        customerId: 1
+        taxAmount: taxAmount
       };
       console.log(bookingRequest)
+      this.bookingService.book(bookingRequest).subscribe({
+        next: (res) => {
+          if (res.status === RSP_SUCCESS) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+            })
+          }else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Something went wrong!',
+            })
+          }
+        }
+      })
     } else {
       return;
     }

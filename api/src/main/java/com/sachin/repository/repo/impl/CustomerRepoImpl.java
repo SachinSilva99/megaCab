@@ -21,4 +21,18 @@ public class CustomerRepoImpl extends CrudRepoImpl implements CustomerRepository
             return Optional.empty();
         }
     }
+
+    @Override
+    public Optional<Customer> findByUserId(Connection connection, Integer userId) {
+        try {
+            Customer customer = executeQuery("SELECT * FROM customer c INNER JOIN user u ON u.id = c.userId WHERE userId = ?", connection, Customer.class, userId);
+            if (customer != null) {
+                return Optional.of(customer);
+            }
+            return Optional.empty();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
+    }
 }

@@ -40,10 +40,10 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public ResponseDTO<BookingResponseDTO> createBooking(BookingRequestDTO requestDTO) {
-        userService.getUserLoggedInUser();
+        User userLoggedInUser = userService.getUserLoggedInUser();
         return TransactionManager.executeTransaction(connection -> {
-            Integer customerId = requestDTO.getCustomerId();
             int distanceId = requestDTO.getDistanceId();
+            Customer customer = customerRepository.findByUserId(connection, userLoggedInUser.getId()).orElseThrow();
             Distance distance = distanceRepository.findById(distanceId, connection, Distance.class, "id");
             Double distanceKm = distance.getDistanceKm();
             Double netAmount = requestDTO.getNetAmount();
@@ -53,8 +53,6 @@ public class BookingServiceImpl implements BookingService {
 
             try {
                 connection = DBConnection.getInstance().getConnection();
-                Customer customer = customerRepository.findById(customerId, connection, Customer.class, "id");
-                if (customer == null) throw new RuntimeException("Customer not found");
 
                 Booking booking = Booking.builder()
                         .bookingNumber(UUID.randomUUID().toString())
@@ -65,6 +63,7 @@ public class BookingServiceImpl implements BookingService {
                         .totalAmount(totalAmount)
                         .taxAmount(taxAmount)
                         .status("PENDING")
+                        .customerId(customer.getId())
                         .createdAt(Timestamp.from(Instant.now()))
                         .build();
 
