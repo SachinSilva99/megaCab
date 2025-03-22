@@ -8,6 +8,8 @@ import {UserLoginRequestDTO, UserService} from '../../core/service/user.service'
 import {RSP_SUCCESS} from '../../core/constant/ResponseCode';
 import {LoggedInUser, StorageService, USER} from '../../core/service/storage.service';
 import Swal from 'sweetalert2'
+import {Router} from '@angular/router';
+import {routes} from '../../app.routes';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +32,7 @@ export class LoginComponent {
     private fb: FormBuilder,
     private userService: UserService,
     private storageService: StorageService,
+    private router: Router,
   ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
@@ -46,7 +49,7 @@ export class LoginComponent {
             const token = res.content;
             const loggedInUser: LoggedInUser = {token: token.accessToken, username: this.loginForm.value.username};
             this.storageService.setItem(USER, loggedInUser);
-            console.log(this.storageService.getItem(USER));
+            this.router.navigate(['']);
           } else {
             Swal.fire({
               text: res.message,

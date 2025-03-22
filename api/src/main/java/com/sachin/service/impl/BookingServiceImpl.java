@@ -2,6 +2,7 @@ package com.sachin.service.impl;
 
 
 import com.sachin.entity.Distance;
+import com.sachin.entity.User;
 import com.sachin.repository.repo.DistanceRepository;
 import com.sachin.service.UserService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -83,6 +84,8 @@ public class BookingServiceImpl implements BookingService {
     public ResponseDTO<List<BookingDetailsResponseDTO>> allBookings() {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
+            User userLoggedInUser = userService.getUserLoggedInUser();
+
             List<BookingDetailsResponseDTO> list = bookingRepository.getAllBookings(connection);
             connection.close();
             return ResponseDTO.success(list);

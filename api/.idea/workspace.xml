@@ -10,19 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ec86bf9-6bb5-4e74-a788-63ae40a2f82a" name="Changes" comment="added testing">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sachin/util/UtilMethods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sachin/annotations/DispatcherServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sachin/annotations/DispatcherServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sachin/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sachin/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sachin/repository/repo/impl/UserRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sachin/repository/repo/impl/UserRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sachin/service/impl/BookingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sachin/service/impl/BookingServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sachin/service/impl/DriverServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sachin/service/impl/DriverServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sachin/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sachin/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/sachin/DriverServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/sachin/DriverServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/sachin/UserServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/sachin/UserServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/app.routes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/core/interceptor/interceptor.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/core/interceptor/interceptor.interceptor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/app/core/service/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/core/service/user.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/post-login/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/post-login/dashboard/dashboard.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/post-login/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/post-login/dashboard/dashboard.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/pre-login/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/pre-login/login/login.component.ts" afterDir="false" />
@@ -361,7 +351,7 @@
       <workItem from="1741924600712" duration="10360000" />
       <workItem from="1741943095224" duration="3597000" />
       <workItem from="1741950474068" duration="2010000" />
-      <workItem from="1742183482996" duration="4085000" />
+      <workItem from="1742183482996" duration="8170000" />
     </task>
     <task id="LOCAL-00001" summary="register completed">
       <option name="closed" value="true" />

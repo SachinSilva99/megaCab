@@ -5,6 +5,8 @@ import {RSP_SUCCESS} from '../../core/constant/ResponseCode';
 import {DistanceResponseDTO, DistanceService} from '../../core/service/distance.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {DriverService} from '../../core/service/driver.service';
+import {StorageService} from '../../core/service/storage.service';
+import {Router} from '@angular/router';
 
 
 interface DriverResponseDTO {
@@ -53,6 +55,8 @@ export class DashboardComponent {
   constructor(
     private carService: CarService,
     private distanceService: DistanceService,
+    private storageService: StorageService,
+    private router: Router,
     private driverService: DriverService) {
     this.fetchCars();
     this.fetchDistances();
@@ -144,5 +148,10 @@ export class DashboardComponent {
     }
 
 
+  }
+
+  logoutClick() {
+    this.storageService.clear();
+    this.router.navigate(["/pre/login"])
   }
 }
