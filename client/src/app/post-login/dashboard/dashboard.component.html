@@ -1,0 +1,57 @@
+<div class="container mt-5">
+  <button (click)="logoutClick()">logout</button>
+  <h2 class="text-center mb-4">Book a Vehicle Rental</h2>
+
+  <div class="row">
+    <!-- Car Selection -->
+    <div class="col-md-6">
+      <h4 class="mb-3">Select a Car</h4>
+      <div class="car-selection d-flex flex-wrap gap-3">
+        <div *ngFor="let car of cars" class="car-card">
+          <div class="card shadow-sm">
+            <img [src]="car.image1" class="card-img-top" alt="Car Image">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ car.model }}</h5>
+              <p class="card-text">Seats: {{ car.noOfSeats }}</p>
+              <button class="btn btn-primary w-100" (click)="selectCar(car)">Select</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Distance Selection (Dropdown) -->
+    <div class="col-md-6">
+      <h4 class="mb-3">Select Distance</h4>
+      <select class="form-select" (change)="selectDistance($event)">
+        <option value="" disabled selected>Select a distance</option>
+        <option *ngFor="let distance of distances" [attr.value]="distance.id">
+          {{ distance.pickupLocation }} → {{ distance.dropLocation }} ({{ distance.distanceKm }} km)
+        </option>
+      </select>
+    </div>
+
+    <!-- Driver Selection (Dropdown) -->
+    <div class="col-md-6">
+      <h4 class="mb-3">Select a Driver</h4>
+      <select class="form-select" (change)="selectDriver($event)">
+        <option value="" disabled selected>Select a driver</option>
+        <option *ngFor="let driver of drivers" [attr.value]="driver.id">
+          {{ driver.name }} - {{ driver.phone }}
+        </option>
+      </select>
+    </div>
+
+
+    <!-- Booking Button -->
+    <div class="text-center mt-4">
+      <button class="btn btn-lg btn-primary px-4"
+              [disabled]="!selectedCar || !selectedDistance || !selectedDriver"
+
+              (click)="bookVehicle()">
+        Confirm Booking
+      </button>
+    </div>
+  </div>
+</div>
+

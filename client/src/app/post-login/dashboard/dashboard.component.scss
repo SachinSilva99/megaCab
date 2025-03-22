@@ -1,0 +1,63 @@
+/* General Spacing */
+.container {
+  max-width: 900px;
+}
+
+/* Car Selection */
+.car-selection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.car-card {
+  width: 180px;
+}
+
+.card-img-top {
+  height: 120px;
+  object-fit: cover;
+}
+
+/* Distance Selection */
+.distance-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.distance-item {
+  width: 100%;
+}
+
+.distance-btn {
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+  transition: 0.3s ease;
+}
+
+.distance-btn:hover,
+.distance-btn.active {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Driver Selection */
+.card {
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Booking Button */
+.btn-primary:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
